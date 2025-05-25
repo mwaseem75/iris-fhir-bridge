@@ -38,6 +38,7 @@ USER>zpm "install iris-fhir-bridge"
 
 ## View Production
 Navigate to [http://localhost:32783/csp/healthshare/fhirbridge/EnsPortal.ProductionConfig.zen?$NAMESPACE=FHIRBRIDGE&](http://localhost:32783/csp/healthshare/fhirbridge/EnsPortal.ProductionConfig.zen?$NAMESPACE=FHIRBRIDGE&) to view the production 
+![image](https://github.com/user-attachments/assets/4c928ba2-b0d1-4003-88b7-7f70f5b4071c)
 
 
 
