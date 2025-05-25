@@ -1,0 +1,11 @@
+    zn "HSLIB"
+    
+    set namespace="FHIRBRIDGE"  
+    // Install a Foundation namespace and change to it
+    Do ##class(HS.Util.Installer.Foundation).Install(namespace)
+
+    zn namespace          
+      
+    zpm "load /opt/irisapp/ -v":1:1
+ 
+    halt
