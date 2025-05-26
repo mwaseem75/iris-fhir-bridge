@@ -1,0 +1,142 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "address": [
+          {
+            "city": "CITYGOESHERE",
+            "line": [
+              "169 MY ST"
+            ],
+            "postalCode": "12345",
+            "state": "MI"
+          }
+        ],
+        "birthDate": "1940-01-02",
+        "extension": [
+          {
+            "extension": [
+              {
+                "url": "ombCategory",
+                "valueCoding": {
+                  "code": "B"
+                }
+              },
+              {
+                "url": "text",
+                "valueString": "B"
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race"
+          }
+        ],
+        "gender": "female",
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "code": "A"
+                }
+              ],
+              "text": "A"
+            },
+            "value": "1000027800"
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "code": "B"
+                }
+              ],
+              "text": "B"
+            },
+            "value": "123"
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "code": "GeneralHospital"
+                }
+              ],
+              "text": "GeneralHospital"
+            },
+            "value": "100567"
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "code": "C"
+                }
+              ],
+              "text": "C"
+            },
+            "value": "432"
+          },
+          {
+            "assigner": {
+              "reference": "Organization/1"
+            },
+            "value": "1927"
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "code": "SB",
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203"
+                }
+              ],
+              "text": "SSN"
+            },
+            "value": "999-99-9999"
+          }
+        ],
+        "managingOrganization": {
+          "reference": "Organization/1"
+        },
+        "maritalStatus": {
+          "coding": [
+            {
+              "code": "M",
+              "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"
+            }
+          ]
+        },
+        "name": [
+          {
+            "family": "Patient",
+            "given": [
+              "Test"
+            ],
+            "text": "Test Patient",
+            "use": "official"
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "use": "home",
+            "value": "(123)456-3604"
+          },
+          {
+            "system": "phone",
+            "use": "work",
+            "value": "(000)000-0000"
+          }
+        ],
+        "id": "2",
+        "meta": {
+          "lastUpdated": "2025-05-15T17:57:08Z",
+          "versionId": "1"
+        }
+      }
+    }
+  ]
+}
