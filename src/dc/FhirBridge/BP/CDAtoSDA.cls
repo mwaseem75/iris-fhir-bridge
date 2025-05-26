@@ -7,7 +7,7 @@ Class dc.FhirBridge.BP.CDAtoSDA Extends Ens.BusinessProcess [ ClassType = persis
 
 Parameter SETTINGS = "TargetConfigName:Basic:selector?context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId},TransformFile:Basic";
 
-Property TargetConfigName As Ens.DataType.ConfigName [ InitialExpression = "HS.FHIR.DTL.Util.HC.SDA3.FHIR.Process" ];
+Property TargetConfigName As Ens.DataType.ConfigName [ InitialExpression = "SDAtoFHIR_process" ];
 
 /// Transforms an CCDA message to SDA, an internal healthcare format for InterSystems IRIS for Health.
 Method OnRequest(pRequest As Ens.StreamContainer, Output pResponse As Ens.Response) As %Status
