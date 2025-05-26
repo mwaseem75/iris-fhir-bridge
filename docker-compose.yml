@@ -14,3 +14,4 @@ services:
       - -a
       - iris session iris -U%SYS '##class(Security.Users).UnExpireUserPasswords("*")'
       - --check-caps false
+
