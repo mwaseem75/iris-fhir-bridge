@@ -1,20 +1,30 @@
-# Summary
+## 🧾 Summary
 IRIS-FHIR Bridget is a robust interoperability engine designed to seamlessly convert healthcare data across multiple standards.
 It seamlessly converts HL7 v2, CCDA, and CSV formats to FHIR, and FHIR back to HL7 v2, enabling smooth data exchange across diverse healthcare systems.
 
 
-## Features
-* Convert HL7v2 to FHIR 
-* Convert CCDA to FHIR 
-* Convert CSV to FHIR 
-* Convert FHIR to HL7
+## 🚀 Key Features
+- 🔁 Convert **HL7 v2 → FHIR**
+- 📝 Convert **CCDA → FHIR**
+- 📊 Convert **CSV → FHIR** (using **InterSystems FHIR Object Model**)
+- 🔄 Convert **FHIR → HL7 v2** 
 
-## Prerequisites
+
+## 📦 Repo Highlights
+✅ **Sample data files**  
+HL7, CDA, FHIR, CSV sample data files provided in the Use `src/data` folder.
+
+✅ **Postman Collection Included**  
+Test all REST endpoints using the ready-to-import Postman collection provided in the `src/Postman_collection` folder.
+
+
+## ✅ Prerequisites
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
 
-## Installation 
 
-### Docker (e.g. for dev purposes)
+## ⚙️ Installation
+
+### 🐳 Docker (e.g. for dev purposes)
 
 Clone/git pull the repo into any local directory
 
@@ -28,7 +38,7 @@ Open the terminal in this directory and run:
 $ docker-compose up -d
 ```
 
-### IPM
+### 🧰 IPM
 
 Open IRIS for Health installation with IPM client installed. Call in any namespace:
 
@@ -36,9 +46,30 @@ Open IRIS for Health installation with IPM client installed. Call in any namespa
 USER>zpm "install iris-fhir-bridge"
 ```
 
-## View Production
+
+## 🖥️ View Production
 Navigate to [http://localhost:32783/csp/healthshare/fhirbridge/EnsPortal.ProductionConfig.zen?$NAMESPACE=FHIRBRIDGE&](http://localhost:32783/csp/healthshare/fhirbridge/EnsPortal.ProductionConfig.zen?$NAMESPACE=FHIRBRIDGE&) to view the production 
 ![image](https://github.com/user-attachments/assets/4c928ba2-b0d1-4003-88b7-7f70f5b4071c)
+
+
+## 🔧 Conversion Workflows
+### 1. HL7 v2 to FHIR
+- **REST API:** `HL7_Http_Service`  
+  - Exposed via HTTP and testable with Postman
+- **File-Based Service:** `HL7_File_Service`  
+  - Monitors folder and auto-processes HL7 v2 files
+
+### 2. CCDA to FHIR
+- **REST API:** `CDA_Http_Service`  
+  - Accepts CCDA XML and converts to FHIR JSON format
+
+### 3. CSV to FHIR (Using FHIR Object Model)
+- **File-Based Service**  
+  - Parses structured CSV data and builds valid FHIR resources (e.g., Patient, Observation) using the InterSystems FHIR Object Model
+
+### 4. FHIR to HL7 v2
+- **Interop Service:** `HS.FHIRServer.Interop.Service`  
+  - Converts FHIR resources back to HL7 v2 messages for legacy system compatibility
 
 
 
