@@ -1,7 +1,7 @@
 Class dc.FhirBridge.BS.CDAHTTP Extends Ens.BusinessService
 {
 
-Property TargetConfigNames As %String(MAXLEN = 1000) [ InitialExpression = "HL7toSDAProcess" ];
+Property TargetConfigNames As %String(MAXLEN = 1000) [ InitialExpression = "CDAtoSDA_Process" ];
 
 Parameter SETTINGS = "TargetConfigNames:Basic:selector?multiSelect=1&context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId}";
 

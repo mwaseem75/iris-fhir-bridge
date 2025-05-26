@@ -29,7 +29,7 @@ ClassMethod cda() As %Status
         $$$ThrowOnError(##class(Ens.Director).CreateBusinessService(tBsName,.tService))
         
         $$$ThrowOnError(tService.ProcessInput(tMsg,.output))
-                #dim output as HS.FHIRServer.Interop.Response
+        #dim output as HS.FHIRServer.Interop.Response
 		// If there is any content, pass it back directly
         set ensResponse = output
 		if ( ensResponse.QuickStreamId '= "" ) {
