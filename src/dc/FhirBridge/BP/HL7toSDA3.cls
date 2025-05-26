@@ -12,7 +12,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <property name='streamContainer' type='Ens.StreamContainer' instantiate='1' />
 </context>
 <sequence xend='200' yend='650' >
-<assign name="Transform HL7 V2 to SDA" property="context.sdaStream" value="##class(hospital.HL7toSDA3).GetSDAFromHL7(request)" action="set" languageOverride="" xpos='200' ypos='250' />
+<assign name="Transform HL7 V2 to SDA" property="context.sdaStream" value="##class(dc.FhirBridge.util).GetSDAFromHL7(request)" action="set" languageOverride="" xpos='200' ypos='250' />
 <assign name="Instantiate Stream" property="context.streamContainer.Stream" value="##class(%Stream.GlobalCharacter).%New()" action="set" languageOverride="" xpos='200' ypos='350' />
 <assign name="Package Stream Container" property="context.tmpStatus" value="context.streamContainer.Stream.CopyFrom(context.sdaStream)" action="set" languageOverride="" xpos='200' ypos='450' />
 <call name='Dispatch to Target' target='SDAtoFHIR_process' async='1' xpos='200' ypos='550' >

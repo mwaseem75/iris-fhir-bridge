@@ -7,7 +7,7 @@ ClassMethod Run() As %Status
     Set sc = $$$OK
     
     // Install FHIR repo
-    Set appKey = "/csp/fhirserver/fhir/r4"
+    Set appKey = "/csp/fhirbridge/fhir/r4"
     Set strategyClass = "HS.FHIRServer.Storage.Json.InteractionsStrategy"
     set metadataPackages = $lb("hl7.fhir.r4.core@4.0.1")
     set importdir="/opt/irisapp/src"

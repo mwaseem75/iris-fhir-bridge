@@ -8,7 +8,8 @@ XData ProductionDefinition
   <ActorPoolSize>2</ActorPoolSize>
   <Item Name="HL7_File_Service" Category="" ClassName="EnsLib.HL7.Service.FileService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="MessageSchemaCategory">2.2</Setting>
-    <Setting Target="Adapter" Name="FilePath">D:\InterSystems\data\in\</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/in/</Setting>
+    <Setting Target="Adapter" Name="FileSpec">*.hl7</Setting>
     <Setting Target="Host" Name="TargetConfigNames">HL7toSDA3_Process</Setting>
   </Item>
   <Item Name="HS.FHIRServer.Interop.Operation" Category="" ClassName="HS.FHIRServer.Interop.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
@@ -33,7 +34,6 @@ XData ProductionDefinition
     <Setting Target="Host" Name="TargetConfigName">Http_FHIR_Operation</Setting>
     <Setting Target="Host" Name="TraceOperations">*FULL*</Setting>
   </Item>
-  
   <Item Name="Http_FHIR_Operation" Category="" ClassName="HS.FHIRServer.Interop.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="HS.Util.Trace.Operations" Category="" ClassName="HS.Util.Trace.Operations" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
@@ -43,15 +43,15 @@ XData ProductionDefinition
   </Item>
   <Item Name="CSV_File_Service" Category="" ClassName="EnsLib.File.PassthroughService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Host" Name="TargetConfigNames">CSVtoFHIR_Process</Setting>
-    <Setting Target="Adapter" Name="FilePath">D:\InterSystems\data\in\</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/in/</Setting>
     <Setting Target="Adapter" Name="FileSpec">*.csv</Setting>
     <Setting Target="Adapter" Name="DeleteFromServer">1</Setting>
   </Item>
-   <Item Name="CSVtoFHIR_Process" Category="" ClassName="dc.FhirBridge.BP.CSVtoFHIR" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  <Item Name="CSVtoFHIR_Process" Category="" ClassName="dc.FhirBridge.BP.CSVtoFHIR" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
-   <Item Name="CSVtoFHIR_Bundle_Operation" Category="" ClassName="dc.FhirBridge.BO.CSVtoFHIRBundle" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="CSVtoFHIR_Bundle_Operation" Category="" ClassName="dc.FhirBridge.BO.CSVtoFHIRBundle" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
   </Item>
-   <Item Name="CSVtoFHIR_Http_Operation" Category="" ClassName="EnsLib.REST.GenericOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="CSVtoFHIR_Http_Operation" Category="" ClassName="EnsLib.REST.GenericOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="HTTPPort">52773</Setting>
     <Setting Target="Adapter" Name="HTTPServer">localhost</Setting>
     <Setting Target="Adapter" Name="URL">/fhir/r4/</Setting>
@@ -68,6 +68,10 @@ XData ProductionDefinition
   <Item Name="CDA_Http_Service" Category="" ClassName="dc.FhirBridge.BS.CDAHTTP" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="CDAtoSDA_Process" Category="" ClassName="dc.FhirBridge.BP.CDAtoSDA" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
+  <Item Name="EnsLib.File.PassthroughOperation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="Filename">%f_%Q%!+(_a).json</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/</Setting>
   </Item>
 </Production>
 }

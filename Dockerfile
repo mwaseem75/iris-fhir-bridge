@@ -24,4 +24,5 @@ RUN --mount=type=bind,source=/,target=/builder/root,from=builder \
     cp -f /builder/root/usr/irissys/iris.cpf /usr/irissys/iris.cpf && \
     python3 /irisdev/app/copy-data.py -c /usr/irissys/iris.cpf -d /builder/root/ 
     
-
+COPY --from=builder /opt/irisapp/src/data /opt/irisapp/data
+RUN chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/irisapp/data
