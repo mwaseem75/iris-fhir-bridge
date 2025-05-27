@@ -72,6 +72,7 @@ Accepts CCDA XML and converts to FHIR JSON format
 ### 3. CSV to FHIR (Using FHIR Object Model)
 - **File-Based Service**  
 Parses structured CSV data and builds valid FHIR resources (e.g., Patient, Observation) using the InterSystems FHIR Object Model
+![image](https://github.com/user-attachments/assets/9bfae4e5-e99c-4506-a078-3a93e5bc75b4)
 
 
 ### 4. FHIR to HL7 v2
