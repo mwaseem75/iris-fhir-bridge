@@ -69,11 +69,9 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
                 set request.method = "POST"
                 set request.url = "Patient"
                 set entry.request = request  
-                do bundleentry.add(entry)
-                
+                do bundleentry.add(entry)               
                
-            }          
-                           
+            }                                     
         }
         set bundle.entry = bundleentry          
         // Log parsed data for debugging
@@ -84,10 +82,12 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
         set bundleDao = bundle.toDao()
         set ptJson = bundleDao.%ToJSON()
         
+        //format JSON
+        set formattedJSON = ##class(dc.FhirBridge.util).FormatJson(ptJson)
         //Set jsonString = CSVData.%ToJSON()
 
         Set stream = ##class(%Stream.GlobalCharacter).%New()
-        Do stream.Write(ptJson)
+        Do stream.Write(formattedJSON)
         Set pResponse = ##class(Ens.StreamContainer).%New()
         Set pResponse.Stream = stream
         

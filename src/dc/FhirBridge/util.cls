@@ -9,6 +9,17 @@ ClassMethod GetSDAFromHL7(pRequest As EnsLib.HL7.Message) As %Stream.GlobalChara
     quit sdaStream
 }
 
+ClassMethod FormatJson(jsonObject) [ Language = python ]
+{
+    import json
+    try:
+        data = json.loads(jsonObject)
+        formatted_json = json.dumps(data,indent=4, sort_keys=False)
+        return formatted_json
+    except json.JSONDecodeError as e:
+        return f"Error: Invalid JSON - {str(e)}"
+}
+
 Storage Default
 {
 <Data name="utilDefaultData">

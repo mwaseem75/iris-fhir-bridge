@@ -28,6 +28,6 @@ COPY --from=builder /opt/irisapp/src/data /opt/irisapp/data
 
 # Set ownership and permissions as root, then switch to non-root user
 USER root
-RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/irisapp/data && \
-    chmod 755 /opt/irisapp/data
+RUN chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/irisapp/data && \
+    chmod -R 755 /opt/irisapp/data
 USER ${ISC_PACKAGE_MGRUSER}
