@@ -1,5 +1,5 @@
 ## 🧾 Summary
-IRIS-FHIR Bridget is a robust interoperability engine designed to seamlessly convert healthcare data across multiple standards.
+IRIS-FHIR-Bridge is a robust interoperability engine designed to seamlessly convert healthcare data across multiple standards.
 It seamlessly converts HL7 v2, CCDA, and CSV formats to FHIR, and FHIR back to HL7 v2, enabling smooth data exchange across diverse healthcare systems.
 
 
