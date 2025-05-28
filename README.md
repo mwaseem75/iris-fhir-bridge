@@ -54,29 +54,35 @@ Navigate to [http://localhost:32783/csp/healthshare/fhirbridge/EnsPortal.Product
 
 ## 🔧 Conversion Workflows
 ### 1. HL7 v2 to FHIR
-- **REST API:** `HL7_Http_Service`  
+**REST API:** `HL7_Http_Service`  
 Exposed via HTTP and testable with Postman
 ![image](https://github.com/user-attachments/assets/707fd829-4d69-4afd-9a09-2726f04554c7)
 
-- **File-Based Service:** `HL7_File_Service`  
+**File-Based Service:** `HL7_File_Service`  
 Monitors folder and auto-processes HL7 v2 files
 ![image](https://github.com/user-attachments/assets/e4d2415b-95f5-4267-8117-7f905b4e60ed)
 
 
 ### 2. CCDA to FHIR
-- **REST API:** `CDA_Http_Service`  
+**REST API:** `CDA_Http_Service`  
 Accepts CCDA XML and converts to FHIR JSON format
 ![image](https://github.com/user-attachments/assets/4eddf0da-75ce-430f-8341-23149d312752)
 
 
 ### 3. CSV to FHIR (Using FHIR Object Model)
-- **File-Based Service**  
-Parses structured CSV data and builds valid FHIR resources (e.g., Patient, Observation) using the InterSystems FHIR Object Model
+**File-Based Service**  
+Parses structured CSV data and builds valid Patient resources using the InterSystems FHIR Object Model
+![image](https://github.com/user-attachments/assets/c928c021-7134-498a-b893-b59effbf62c5)
 ![image](https://github.com/user-attachments/assets/9bfae4e5-e99c-4506-a078-3a93e5bc75b4)
+
+Parses structured CSV data and builds valid Observation resources using the InterSystems FHIR Object Model
+![image](https://github.com/user-attachments/assets/1b2fd08b-0762-4024-82f4-6559c1e6272a)
+![image](https://github.com/user-attachments/assets/2856cc10-a842-482d-a3fa-05ba6a5b13a1)
+
 
 
 ### 4. FHIR to HL7 v2
-- **Interop Service:** `HS.FHIRServer.Interop.Service`  
+**Interop Service:** `HS.FHIRServer.Interop.Service`  
 Converts FHIR resources back to HL7 v2 messages for legacy system compatibility
 ![image](https://github.com/user-attachments/assets/56ffd185-7cdb-4caa-81e8-65b96123535b)
 
