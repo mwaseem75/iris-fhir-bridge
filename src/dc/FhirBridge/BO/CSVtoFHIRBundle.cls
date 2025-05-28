@@ -23,88 +23,131 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
         set headers = stream.ReadLine()
         set headerArray = $listfromstring(headers, ",")
         
-        //Set response = ..FhirBundleCreator(pRequest.OriginalFilename)
         while 'stream.AtEnd {
             set line = stream.ReadLine()
-            if line '= "" {
-                set row = ##class(%DynamicObject).%New()
+            if line '= "" {                
                 set values = $listfromstring(line, ",")
-                //Create patient resource
-                #dim patient As HS.FHIRModel.R4.Patient
-                set patient = ##class(HS.FHIRModel.R4.Patient).%New()
-                // Map values to headers
-                for i=1:1:$listlength(headerArray) {
-                    //convert fieldName into lower char
-                    set fieldName = $ZCONVERT($listget(headerArray, i),"L")
-                    If (fieldName = "firstname") {
-                        Do patient.IncludeName()
-                        set name = patient.name.MakeEntry()
-                        Do name.IncludeGiven()
-                        Do name.given.add($listget(values, i))
-                        
-                    } ElseIf (fieldName = "familyname") {
-                        set name.family = $listget(values, i)
-                        Do patient.name.add(name)
-                        Do patient.name.get(0).put("use","official")
-                    } Elseif ((fieldName = "gender")) {
-                        set patient.gender = $listget(values,i)                    
-                    } Elseif ((fieldName = "birthdate")) {
-                        set patient.birthDate = $listget(values,i)
-                    }
-                   
-                    set fieldName = $listget(headerArray, i)
-                    set fieldValue = $listget(values, i)
-                    if fieldName '= "" {
-                        do row.%Set(fieldName, fieldValue)
-                    }
+                //get first column
+                set CSVresource = $ZCONVERT($listget(values, 1),"L")
+                if CSVresource = "patient"
+                {
+                   set resource = ..CreatePatientResource(headers,line)
+                }
+                elseif CSVresource = "observation"
+                {
+                    set resource = ..CreateObservationResource(headers,line)
+                }
                 }
                 
-                do CSVData.%Push(row)
-            
                 //create bundle entry
-                
                 set entry = ##class(HS.FHIRModel.R4.BundleX.Entry).%New()                 
-                set entry.resource = patient
+                set entry.resource = resource
                 set request = ##class(HS.FHIRModel.R4.BundleX.Request).%New()
                 set request.method = "POST"
-                set request.url = "Patient"
+                set request.url = $ZConvert($Extract(CSVresource, 1), "U")_$Extract(CSVresource, 2, *)
                 set entry.request = request  
                 do bundleentry.add(entry)               
                
-            }                                     
-        }
+            }          
+                                 
         set bundle.entry = bundleentry          
-        // Log parsed data for debugging
-        //$$$LOGINFO("Parsed CSV with "_CSVData.%Size()_" rows")
-        //set patientDao = patient.toDao()
-        //set ptJson = patientDao.%ToJSON()
-
         set bundleDao = bundle.toDao()
         set ptJson = bundleDao.%ToJSON()
-        
+      
         //format JSON
         set formattedJSON = ##class(dc.FhirBridge.util).FormatJson(ptJson)
-        //Set jsonString = CSVData.%ToJSON()
 
         Set stream = ##class(%Stream.GlobalCharacter).%New()
         Do stream.Write(formattedJSON)
         Set pResponse = ##class(Ens.StreamContainer).%New()
-        Set pResponse.Stream = stream
-        
-        //set tSC = ConvertToStreamContainer(CSVData, pResponse)
-        //if $$$ISERR(tSC) {
-        //    throw ##class(%Exception.StatusException).CreateFromStatus(tSC)
-        // }
-        
-        //Set pResponse = ##class(Ens.StreamContainer).%New()
-        //Set pResponse.OriginalFilename = response
-        //Set pResponse.Stream = ##class(%Stream.FileBinary).%New()
-        //$$$TOE(tSC, pResponse.Stream.LinkToFile(response))
-	}
-	Catch (ex) {
+        Set pResponse.Stream = stream        
+       
+    }
+    Catch (ex) {
 		Set tSC = ex.AsStatus()
-	}
-	Quit tSC
+	    }
+    Quit tSC
+}
+
+/// Description
+ClassMethod CreatePatientResource(headers As %String, line As %String) As HS.FHIRModel.R4.Patient
+{
+    // do something
+    set headerArray = $listfromstring(headers, ",")
+    set values = $listfromstring(line, ",")
+    //Create patient resource
+    #dim patient As HS.FHIRModel.R4.Patient
+    set patient = ##class(HS.FHIRModel.R4.Patient).%New()
+    // Map values to headers, start form 2nd colums as 1st column is resource type
+    for i=1:1:$listlength(headerArray) {
+        //convert fieldName into lower char
+        set fieldName = $ZCONVERT($listget(headerArray, i),"L")
+        If (fieldName = "firstname") {
+            Do patient.IncludeName()
+            set name = patient.name.MakeEntry()
+            Do name.IncludeGiven()
+            Do name.given.add($listget(values, i))
+            
+        } ElseIf (fieldName = "familyname") {
+            set name.family = $listget(values, i)
+            Do patient.name.add(name)
+            Do patient.name.get(0).put("use","official")
+        } Elseif ((fieldName = "gender")) {
+            set patient.gender = $listget(values,i)                    
+        } Elseif ((fieldName = "birthdate")) {
+            set patient.birthDate = $listget(values,i)
+        } Elseif ((fieldName = "patientid")) {
+            set patient.fhirID = $listget(values,i)    
+        }    
+    }
+    Return patient
+}
+
+/// Description
+ClassMethod CreateObservationResource(headers As %String, line As %String) As HS.FHIRModel.R4.Observation
+{
+    // do something
+    set headerArray = $listfromstring(headers, ",")
+    set values = $listfromstring(line, ",")
+    //Create patient resource
+    #dim observation As HS.FHIRModel.R4.Observation
+    set Observation = ##class(HS.FHIRModel.R4.Observation).%New()
+    // Map values to headers, start form 2nd colums as 1st column is resource type
+    for i=1:1:$listlength(headerArray) {
+        //convert fieldName into lower char
+        set fieldName = $ZCONVERT($listget(headerArray, i),"L")
+        If (fieldName = "status") {
+            set Observation.status = $listget(values, i)
+        }
+        elseIf (fieldName = "code_system") {
+            Set code = ##class(HS.FHIRModel.R4.CodeableConcept).%New()
+            do code.IncludeCoding()
+            Set coding = ##class(HS.FHIRModel.R4.Coding).%New()         
+            Set coding.system = $listget(values, i)
+            //get two next values from csv file and increament i accordingly         
+            Set coding.code = $listget(values, i + 1)         
+            Set coding.display = $listget(values, i + 2)         
+            Do code.coding.add(coding)         
+            Set Observation.code = code         
+            set i = i + 2         
+        }
+        elseif(fieldName = "subject_reference")
+        {
+            Set subject = ##class(HS.FHIRModel.R4.Reference).%New()
+            Set subject.reference = $listget(values, i)
+            Set Observation.subject = subject
+        }
+        elseIf (fieldName = "value") {
+            Set value = ##class(HS.FHIRModel.R4.Quantity).%New()
+            Set value.value = $listget(values, i)
+            Set value.unit = $listget(values, i + 1)
+            Set value.system = $listget(values, i + 2)
+            Set value.code = $listget(values, i + 3)
+            set i = i + 3
+            Set Observation.valueQuantity = value
+        }
+    }
+    Return Observation
 }
 
 }
