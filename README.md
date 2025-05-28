@@ -60,12 +60,14 @@ Exposed via HTTP and testable with Postman
 
 **File-Based Service:** `HL7_File_Service`  
 Monitors folder and auto-processes HL7 v2 files
+![image](https://github.com/user-attachments/assets/bac5f13f-c113-4454-a42d-aea2619bdb73)
 ![image](https://github.com/user-attachments/assets/e4d2415b-95f5-4267-8117-7f905b4e60ed)
 
 
 ### 2. CCDA to FHIR
 **REST API:** `CDA_Http_Service`  
 Accepts CCDA XML and converts to FHIR JSON format
+![image](https://github.com/user-attachments/assets/4810564e-794a-4284-a291-9abebafe2ab9)
 ![image](https://github.com/user-attachments/assets/4eddf0da-75ce-430f-8341-23149d312752)
 
 
