@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "7fcbaa0c-7bca-4169-8e94-a725d69bce04",
-		"name": "irisFHIRBridge",
+		"name": "FHIRBridge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13406816"
 	},
@@ -10,7 +10,7 @@
 			"name": "CapabilityStatement",
 			"request": {
 				"auth": {
-					"type": "noauth"				
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [
@@ -40,10 +40,215 @@
 			"response": []
 		},
 		{
+			"name": "HL7toFHIR",
+			"request": {
+				"auth": {
+					"type": "noauth"				
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "app",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "MSH|^~\\&|FOCUS 2000 ver.4.3.12|Cape Canaveral|eTLAB|888|20080624133634||ADT^A01|1001|P|2.2|1|ccc|||||\r\nEVN|A01|200811241212||1\r\nPID|1|1000027800^^^^A~123^^^^B~100567^^^^GeneralHospital~432^^^^C|1000027800^^^^A~123^^^^B~100567^^^^GeneralHospital~432^^^^C|1927|Patient^Test||19400102|F||B|169 MY ST^^CITYGOESHERE^MI^12345||(123)456-3604|(000)",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:32783/api/hl7/fhir",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32783",
+					"path": [
+						"api",
+						"hl7",
+						"fhir"
+					]
+				},
+				"description": "test"
+			},
+			"response": []
+		},
+		{
+			"name": "Post bundle",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:32783/csp/fhirbridge/fhir/r4/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32783",
+					"path": [
+						"csp",
+						"fhirbridge",
+						"fhir",
+						"r4",
+						""
+					]
+				},
+				"description": "test"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Patient",
+			"request": {
+				"method": "GET",
+				"header":[
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:32783/csp/fhirbridge/fhir/r4/Patient/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32783",
+					"path": [
+						"csp",
+						"fhirbridge",
+						"fhir",
+						"r4",
+						"Patient"
+					]
+				},
+				"description": "test"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Observation",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Bundle\",\r\n    \"type\": \"batch\",\r\n    \"entry\": [\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8867-4\",\r\n                            \"display\": \"Heart rate\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/101\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 72,\r\n                    \"unit\": \"beats/min\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"/min\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8310-5\",\r\n                            \"display\": \"Body temperature\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/101\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 36.6,\r\n                    \"unit\": \"Cel\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"Cel\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8302-2\",\r\n                            \"display\": \"Body height\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/101\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 170,\r\n                    \"unit\": \"cm\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"cm\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"29463-7\",\r\n                            \"display\": \"Body weight\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/101\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 70,\r\n                    \"unit\": \"kg\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"kg\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2339-0\",\r\n                            \"display\": \"Glucose [Mass/volume] in Blood\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/102\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 85,\r\n                    \"unit\": \"mg/dL\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"mg/dL\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8867-4\",\r\n                            \"display\": \"Heart rate\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/102\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 69,\r\n                    \"unit\": \"beats/min\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"/min\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8310-5\",\r\n                            \"display\": \"Body temperature\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/102\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 37,\r\n                    \"unit\": \"Cel\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"Cel\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8302-2\",\r\n                            \"display\": \"Body height\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/102\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 180,\r\n                    \"unit\": \"cm\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"cm\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"29463-7\",\r\n                            \"display\": \"Body weight\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/102\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 71,\r\n                    \"unit\": \"kg\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"kg\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2339-0\",\r\n                            \"display\": \"Glucose [Mass/volume] in Blood\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/103\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 87,\r\n                    \"unit\": \"mg/dL\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"mg/dL\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8867-4\",\r\n                            \"display\": \"Heart rate\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/103\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 70,\r\n                    \"unit\": \"beats/min\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"min\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8310-5\",\r\n                            \"display\": \"Body temperature\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/103\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 35,\r\n                    \"unit\": \"Cel\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"Cel\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"8302-2\",\r\n                            \"display\": \"Body height\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/104\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 159,\r\n                    \"unit\": \"cm\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"cm\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"29463-7\",\r\n                            \"display\": \"Body weight\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/104\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 72,\r\n                    \"unit\": \"kg\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"kg\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2339-0\",\r\n                            \"display\": \"Glucose [Mass/volume] in Blood\"\r\n                        }\r\n                    ]\r\n                },\r\n                \"subject\": {\r\n                    \"reference\": \"Patient/104\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"value\": 83,\r\n                    \"unit\": \"mg/dL\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"mg/dL\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:32783/csp/fhirbridge/fhir/r4/Observation/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32783",
+					"path": [
+						"csp",
+						"fhirbridge",
+						"fhir",
+						"r4",
+						"Observation",
+						""
+					]
+				},
+				"description": "test"
+			},
+			"response": []
+		},
+		{
+			"name": "CDAtoFHIR",
+			"request": {
+				"auth": {
+					"type": "noauth"				
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "app",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<ClinicalDocument xmlns=\"urn:hl7-org:v3\" xmlns:sdtc=\"urn:hl7-org:sdtc\">\r\n    <!-- Header -->\r\n    <realmCode code=\"US\"/>\r\n    <typeId root=\"2.16.840.1.113883.1.3\" extension=\"POCD_HD000040\"/>\r\n    <templateId root=\"2.16.840.1.113883.10.20.22.1.1\" extension=\"2015-08-01\"/>\r\n    <templateId root=\"2.16.840.1.113883.10.20.22.1.2\" extension=\"2015-08-01\"/>\r\n    <id root=\"2.16.840.1.113883.19.5\" extension=\"12345\"/>\r\n    <code code=\"34133-9\" codeSystem=\"2.16.840.1.113883.6.1\" codeSystemName=\"LOINC\" displayName=\"Summarization of Episode Note\"/>\r\n    <title>Continuity of Care Document</title>\r\n    <effectiveTime value=\"20250524\"/>\r\n    <confidentialityCode code=\"N\" codeSystem=\"2.16.840.1.113883.5.25\"/>\r\n    <languageCode code=\"en-US\"/>\r\n    \r\n    <!-- Patient Information -->\r\n    <recordTarget>\r\n        <patientRole>\r\n            <id extension=\"123456789\" root=\"2.16.840.1.113883.4.1\"/>\r\n            <addr>\r\n                <streetAddressLine>123 Main St</streetAddressLine>\r\n                <city>Anytown</city>\r\n                <state>CA</state>\r\n                <postalCode>90210</postalCode>\r\n                <country>US</country>\r\n            </addr>\r\n            <telecom value=\"tel:+1-555-123-4567\" use=\"HP\"/>\r\n            <patient>\r\n                <name>\r\n                    <given>John</given>\r\n                    <family>Doe</family>\r\n                </name>\r\n                <administrativeGenderCode code=\"M\" codeSystem=\"2.16.840.1.113883.5.1\"/>\r\n                <birthTime value=\"19800115\"/>\r\n            </patient>\r\n        </patientRole>\r\n    </recordTarget>\r\n    \r\n    <!-- Author -->\r\n    <author>\r\n        <time value=\"20250524\"/>\r\n        <assignedAuthor>\r\n            <id root=\"2.16.840.1.113883.19.5\" extension=\"999999\"/>\r\n            <assignedPerson>\r\n                <name>\r\n                    <given>Jane</given>\r\n                    <family>Smith</family>\r\n                </name>\r\n            </assignedPerson>\r\n        </assignedAuthor>\r\n    </author>\r\n    \r\n    <!-- Custodian -->\r\n    <custodian>\r\n        <assignedCustodian>\r\n            <representedCustodianOrganization>\r\n                <id root=\"2.16.840.1.113883.19.5\"/>\r\n                <name>Health Clinic</name>\r\n            </representedCustodianOrganization>\r\n        </assignedCustodian>\r\n    </custodian>\r\n    \r\n    <!-- Allergies Section -->\r\n    <component>\r\n        <structuredBody>\r\n            <component>\r\n                <section>\r\n                    <templateId root=\"2.16.840.1.113883.10.20.22.2.6.1\" extension=\"2015-08-01\"/>\r\n                    <code code=\"48765-2\" codeSystem=\"2.16.840.1.113883.6.1\" codeSystemName=\"LOINC\"/>\r\n                    <title>Allergies and Adverse Reactions</title>\r\n                    <text>No known allergies</text>\r\n                    <entry typeCode=\"DRIV\">\r\n                        <act classCode=\"ACT\" moodCode=\"EVN\">\r\n                            <templateId root=\"2.16.840.1.113883.10.20.22.4.30\" extension=\"2015-08-01\"/>\r\n                            <code code=\"CONC\" codeSystem=\"2.16.840.1.113883.5.6\"/>\r\n                            <statusCode code=\"active\"/>\r\n                            <participant typeCode=\"CSM\">\r\n                                <participantRole classCode=\"MANU\">\r\n                                    <playingEntity classCode=\"MMAT\">\r\n                                        <code code=\"70618\" codeSystem=\"2.16.840.1.113883.6.88\" displayName=\"Penicillin\"/>\r\n                                    </playingEntity>\r\n                                </participantRole>\r\n                            </participant>\r\n                        </act>\r\n                    </entry>\r\n                </section>\r\n            </component>\r\n            \r\n            <!-- Medications Section -->\r\n            <component>\r\n                <section>\r\n                    <templateId root=\"2.16.840.1.113883.10.20.22.2.1.1\" extension=\"2014-06-09\"/>\r\n                    <code code=\"10160-0\" codeSystem=\"2.16.840.1.113883.6.1\" codeSystemName=\"LOINC\"/>\r\n                    <title>Medications</title>\r\n                    <text>\r\n                        <paragraph>Lisinopril 10 mg daily</paragraph>\r\n                    </text>\r\n                    <entry>\r\n                        <substanceAdministration classCode=\"SBADM\" moodCode=\"EVN\">\r\n                            <templateId root=\"2.16.840.1.113883.10.20.22.4.16\" extension=\"2014-06-09\"/>\r\n                            <statusCode code=\"active\"/>\r\n                            <consumable>\r\n                                <manufacturedProduct>\r\n                                    <manufacturedMaterial>\r\n                                        <code code=\"197897\" codeSystem=\"2.16.840.1.113883.6.88\" displayName=\"Lisinopril\"/>\r\n                                    </manufacturedMaterial>\r\n                                </manufacturedProduct>\r\n                            </consumable>\r\n                        </substanceAdministration>\r\n                    </entry>\r\n                </section>\r\n            </component>\r\n            \r\n            <!-- Problems Section -->\r\n            <component>\r\n                <section>\r\n                    <templateId root=\"2.16.840.1.113883.10.20.22.2.5.1\" extension=\"2015-08-01\"/>\r\n                    <code code=\"11450-4\" codeSystem=\"2.16.840.1.113883.6.1\" codeSystemName=\"LOINC\"/>\r\n                    <title>Problem List</title>\r\n                    <text>\r\n                        <paragraph>Hypertension</paragraph>\r\n                    </text>\r\n                    <entry>\r\n                        <act classCode=\"ACT\" moodCode=\"EVN\">\r\n                            <templateId root=\"2.16.840.1.113883.10.20.22.4.3\" extension=\"2015-08-01\"/>\r\n                            <code code=\"CONC\" codeSystem=\"2.16.840.1.113883.5.6\"/>\r\n                            <statusCode code=\"active\"/>\r\n                            <entryRelationship typeCode=\"SUBJ\">\r\n                                <observation classCode=\"OBS\" moodCode=\"EVN\">\r\n                                    <code code=\"64572001\" codeSystem=\"2.16.840.1.113883.6.96\" displayName=\"Hypertension\"/>\r\n                                </observation>\r\n                            </entryRelationship>\r\n                        </act>\r\n                    </entry>\r\n                </section>\r\n            </component>\r\n        </structuredBody>\r\n    </component>\r\n</ClinicalDocument>",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:32783/api/cda/fhir",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32783",
+					"path": [
+						"api",
+						"cda",
+						"fhir"
+					]
+				},
+				"description": "test"
+			},
+			"response": []
+		},
+		{
 			"name": "FHIRtoHL7",
 			"request": {
 				"auth": {
-					"type": "noauth"							
+					"type": "noauth"					
 				},
 				"method": "POST",
 				"header": [
@@ -76,154 +281,6 @@
 						"r4",
 						"Patient",
 						"hl7adt"
-					]
-				},
-				"description": "FHIRtoHL7"
-			},
-			"response": []
-		},
-		
-		{
-			"name": "HL7toFHIR",
-			"request": {
-				"auth": {
-					"type": "noauth"							
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "",
-						"value": "app",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "MSH|^~\\&||^^NPI|||20250524000614+0000||^|67348,68774.1512661|P|2.5.1|||AL|AL|||||PH_SS-Ack^SS Sender^2.16.840.1.114222.4.10.3^ISO\r\nEVN||202505240006|||||^^NPI\r\nPID|1||||Patient^Test^^^^^||19400102|F|||||^PRN^PH^^^123^456|^WPN^PH^^^000^000||||||||||||||||||||",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:32783/api/hl7/fhir",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "32783",
-					"path": [
-						"irishealth",
-						"csp",
-						"testrest",
-						"fhir"
-					]
-				},
-				"description": "test"
-			},
-			"response": []
-		},
-		
-		{
-			"name": "CDAtoFHIR",
-			"request": {
-				"auth": {
-				"type": "noauth"								
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "",
-						"value": "app",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "MSH|^~\\&||^^NPI|||20250524000614+0000||^|67348,68774.1512661|P|2.5.1|||AL|AL|||||PH_SS-Ack^SS Sender^2.16.840.1.114222.4.10.3^ISO\r\nEVN||202505240006|||||^^NPI\r\nPID|1||||Patient^Test^^^^^||19400102|F|||||^PRN^PH^^^123^456|^WPN^PH^^^000^000||||||||||||||||||||",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:32783/api/cda/fhir",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "32783",
-					"path": [
-						"irishealth",
-						"csp",
-						"testrest",
-						"fhir"
-					]
-				},
-				"description": "test"
-			},
-			"response": []
-		},
-		{
-			"name": "Patient",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:32783/csp/fhirbridge/fhir/r4/Patient",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "32783",
-					"path": [
-						"csp",
-						"fhirbridge",
-						"fhir",
-						"r4",
-						"Patient"
-					]
-				},
-				"description": "test"
-			},
-			"response": []
-		},
-		{
-			"name": "Observation",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:32783/csp/fhirbridge/fhir/r4/Observation",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "32783",
-					"path": [
-						"csp",
-						"fhirbridge",
-						"fhir",
-						"r4",
-						"Observation"
 					]
 				},
 				"description": "test"

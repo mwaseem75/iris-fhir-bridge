@@ -1,16 +1,13 @@
-resourceType,status,code_system,code,code_display,subject_reference,effectiveDateTime,value,unit,value_system,value_code
-Observation,final,http://loinc.org,8867-4,Heart rate,Patient/101,2025-05-28T12:23:00+05:00,72,beats/min,http://unitsofmeasure.org,/min
-Observation,final,http://loinc.org,8310-5,Body temperature,Patient/101,2025-05-28T12:23:00+05:00,36.6,Cel,http://unitsofmeasure.org,Cel
-Observation,final,http://loinc.org,8302-2,Body height,Patient/101,2025-05-28T12:23:00+05:00,170,cm,http://unitsofmeasure.org,cm
-Observation,final,http://loinc.org,29463-7,Body weight,Patient/101,2025-05-28T12:23:00+05:00,70,kg,http://unitsofmeasure.org,kg
-Observation,final,http://loinc.org,2339-0,Glucose [Mass/volume] in Blood,Patient/102,2025-05-28T12:23:00+05:00,85,mg/dL,http://unitsofmeasure.org,mg/dL
-Observation,final,http://loinc.org,8867-4,Heart rate,Patient/102,2025-05-28T12:23:00+05:00,69,beats/min,http://unitsofmeasure.org,/min
-Observation,final,http://loinc.org,8310-5,Body temperature,Patient/102,2025-05-28T12:23:00+05:00,37,Cel,http://unitsofmeasure.org,Cel
-Observation,final,http://loinc.org,8302-2,Body height,Patient/102,2025-05-28T12:23:00+05:00,180,cm,http://unitsofmeasure.org,cm
-Observation,final,http://loinc.org,29463-7,Body weight,Patient/102,2025-05-28T12:23:00+05:00,71,kg,http://unitsofmeasure.org,kg
-Observation,final,http://loinc.org,2339-0,Glucose [Mass/volume] in Blood,Patient/103,2025-05-28T12:23:00+05:00,87,mg/dL,http://unitsofmeasure.org,mg/dL
-Observation,final,http://loinc.org,8867-4,Heart rate,Patient/103,2025-05-28T12:23:00+05:00,70,beats/min,http://unitsofmeasure.org,/min
-Observation,final,http://loinc.org,8310-5,Body temperature,Patient/103,2025-05-28T12:23:00+05:00,35,Cel,http://unitsofmeasure.org,Cel
-Observation,final,http://loinc.org,8302-2,Body height,Patient/104,2025-05-28T12:23:00+05:00,159,cm,http://unitsofmeasure.org,cm
-Observation,final,http://loinc.org,29463-7,Body weight,Patient/104,2025-05-28T12:23:00+05:00,72,kg,http://unitsofmeasure.org,kg
-Observation,final,http://loinc.org,2339-0,Glucose [Mass/volume] in Blood,Patient/104,2025-05-28T12:23:00+05:00,83,mg/dL,http://unitsofmeasure.org,mg/dL
+resourceType,status,code_system,code,code_display,subject_reference,effectiveDateTime,value,unit,value_system,value_code,
+Observation,final,http://loinc.org,8310-5,Body temperature,Patient/101,2025-05-28T12:23:00+05:00,36.6,Cel,http://unitsofmeasure.org,Cel,
+Observation,final,http://loinc.org,8302-2,Body height,Patient/101,2025-05-28T12:23:00+05:00,170,cm,http://unitsofmeasure.org,cm,
+Observation,final,http://loinc.org,29463-7,Body weight,Patient/101,2025-05-28T12:23:00+05:00,70,kg,http://unitsofmeasure.org,kg,
+Observation,final,http://loinc.org,2339-0,Glucose [Mass/volume] in Blood,Patient/102,2025-05-28T12:23:00+05:00,85,mg/dL,http://unitsofmeasure.org,mg/dL,
+Observation,final,http://loinc.org,8310-5,Body temperature,Patient/102,2025-05-28T12:23:00+05:00,37,Cel,http://unitsofmeasure.org,Cel,
+Observation,final,http://loinc.org,8302-2,Body height,Patient/102,2025-05-28T12:23:00+05:00,180,cm,http://unitsofmeasure.org,cm,
+Observation,final,http://loinc.org,29463-7,Body weight,Patient/102,2025-05-28T12:23:00+05:00,71,kg,http://unitsofmeasure.org,kg,
+Observation,final,http://loinc.org,2339-0,Glucose [Mass/volume] in Blood,Patient/103,2025-05-28T12:23:00+05:00,87,mg/dL,http://unitsofmeasure.org,mg/dL,
+Observation,final,http://loinc.org,8310-5,Body temperature,Patient/103,2025-05-28T12:23:00+05:00,35,Cel,http://unitsofmeasure.org,Cel,
+Observation,final,http://loinc.org,8302-2,Body height,Patient/104,2025-05-28T12:23:00+05:00,159,cm,http://unitsofmeasure.org,cm,
+Observation,final,http://loinc.org,29463-7,Body weight,Patient/104,2025-05-28T12:23:00+05:00,72,kg,http://unitsofmeasure.org,kg,
+Observation,final,http://loinc.org,2339-0,Glucose [Mass/volume] in Blood,Patient/104,2025-05-28T12:23:00+05:00,83,mg/dL,http://unitsofmeasure.org,mg/dL,

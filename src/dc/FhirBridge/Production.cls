@@ -51,12 +51,7 @@ XData ProductionDefinition
   </Item>
   <Item Name="CSVtoFHIR_Bundle_Operation" Category="" ClassName="dc.FhirBridge.BO.CSVtoFHIRBundle" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
   </Item>
-  <Item Name="CSVtoFHIR_Http_Operation" Category="" ClassName="EnsLib.REST.GenericOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
-    <Setting Target="Adapter" Name="HTTPPort">52773</Setting>
-    <Setting Target="Adapter" Name="HTTPServer">localhost</Setting>
-    <Setting Target="Adapter" Name="URL">/fhir/r4/</Setting>
-  </Item>
-  <Item Name="FHIRRouter" Category="" ClassName="dc.FhirBridge.BP.FHIRRouter" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+   <Item Name="FHIRRouter" Category="" ClassName="dc.FhirBridge.BP.FHIRRouter" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="FHIRtoSDA_Process" Category="" ClassName="dc.FhirBridge.BP.FHIRtoSDA" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="TargetConfigName">SDAtoHL7_Process</Setting>

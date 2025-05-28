@@ -18,11 +18,12 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
         //init bundle 
         set bundle = ##class(HS.FHIRModel.R4.Bundle).%New()
         set bundle.type = "batch"
+        //include Entry object
         do bundle.IncludeEntry()                  
         set bundleentry = ##class(HS.FHIRModel.R4.BundleX.SeqOfBundleXEntry).%New()                  
         set headers = stream.ReadLine()
         set headerArray = $listfromstring(headers, ",")
-        
+        //Read the file
         while 'stream.AtEnd {
             set line = stream.ReadLine()
             if line '= "" {                
@@ -45,17 +46,20 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
                 set request = ##class(HS.FHIRModel.R4.BundleX.Request).%New()
                 if CSVresource = "patient"
                 {
+                    // Using PUT menthod as we are forcing to use our provided ID
                     set request.method = "PUT"
                     set rid = resource.fhirID 
                     set request.url = $ZConvert($Extract(CSVresource, 1), "U")_$Extract(CSVresource, 2, *)_"/"_rid
                 } 
                 else
                 {
+                    //Post the resources with auto assign ID's
                     set request.method = "POST"                    
                     set request.url = $ZConvert($Extract(CSVresource, 1), "U")_$Extract(CSVresource, 2, *)
                 }
                 
                 set entry.request = request  
+                //add resource into bundle 
                 do bundleentry.add(entry)               
                
             }          
@@ -66,7 +70,7 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
       
         //format JSON
         set formattedJSON = ##class(dc.FhirBridge.util).FormatJson(ptJson)
-
+        //convert to stream    
         Set stream = ##class(%Stream.GlobalCharacter).%New()
         Do stream.Write(formattedJSON)
         Set pResponse = ##class(Ens.StreamContainer).%New()
@@ -79,10 +83,10 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
     Quit tSC
 }
 
-/// Description
+/// Generate Patient Resource
 ClassMethod CreatePatientResource(headers As %String, line As %String) As HS.FHIRModel.R4.Patient
 {
-    // do something
+    // Get columns into header array
     set headerArray = $listfromstring(headers, ",")
     set values = $listfromstring(line, ",")
     //Create patient resource
@@ -96,8 +100,7 @@ ClassMethod CreatePatientResource(headers As %String, line As %String) As HS.FHI
             Do patient.IncludeName()
             set name = patient.name.MakeEntry()
             Do name.IncludeGiven()
-            Do name.given.add($listget(values, i))
-            
+            Do name.given.add($listget(values, i))           
         } ElseIf (fieldName = "familyname") {
             set name.family = $listget(values, i)
             Do patient.name.add(name)
@@ -113,10 +116,10 @@ ClassMethod CreatePatientResource(headers As %String, line As %String) As HS.FHI
     Return patient
 }
 
-/// Description
+/// Generate Observation Resource
 ClassMethod CreateObservationResource(headers As %String, line As %String) As HS.FHIRModel.R4.Observation
 {
-    // do something
+     // Get columns into header array
     set headerArray = $listfromstring(headers, ",")
     set values = $listfromstring(line, ",")
     //Create patient resource
@@ -149,7 +152,8 @@ ClassMethod CreateObservationResource(headers As %String, line As %String) As HS
         }
         elseIf (fieldName = "value") {
             Set value = ##class(HS.FHIRModel.R4.Quantity).%New()
-            Set value.value = $listget(values, i)
+            //convert value into numeric
+            Set value.value = +$listget(values, i)
             Set value.unit = $listget(values, i + 1)
             Set value.system = $listget(values, i + 2)
             Set value.code = $listget(values, i + 3)

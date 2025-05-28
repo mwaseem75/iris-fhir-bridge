@@ -30,9 +30,6 @@ ClassMethod Run() As %Status
     set config.DebugMode = 4
     do strategy.SaveServiceConfigData(config)  
   
-    //Load resources
-    zw ##class(HS.FHIRServer.Tools.DataLoader).SubmitResourceFiles("/opt/irisapp/src/fhirdata", "FHIRSERVER", appKey)
-
     Return sc
 }
 
