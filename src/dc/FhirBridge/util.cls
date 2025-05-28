@@ -20,6 +20,22 @@ ClassMethod FormatJson(jsonObject) [ Language = python ]
         return f"Error: Invalid JSON - {str(e)}"
 }
 
+ClassMethod GetResourceType(pRequest As Ens.StreamContainer) As %String
+{
+    
+    // do something
+    set stream = pRequest.Stream
+    if '$isobject(stream) {
+            throw ##class(%Exception.General).%New("No stream found in Ens.StreamContainer")
+    }
+    set headers = stream.ReadLine()    
+    set line = stream.ReadLine()         
+    set values = $listfromstring(line, ",")       
+    set CSVresource = $ZCONVERT($listget(values, 1),"L")
+    return CSVresource
+}
+
+
 Storage Default
 {
 <Data name="utilDefaultData">

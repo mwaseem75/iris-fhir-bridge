@@ -69,8 +69,12 @@ XData ProductionDefinition
   </Item>
   <Item Name="CDAtoSDA_Process" Category="" ClassName="dc.FhirBridge.BP.CDAtoSDA" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
-  <Item Name="EnsLib.File.PassthroughOperation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
-    <Setting Target="Host" Name="Filename">%f_%Q%!+(_a).json</Setting>
+  <Item Name="CSVtoFHIR_Patient_Operation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="Filename">Patient_%f_%Q%!+(_a).json</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/</Setting>
+  </Item>
+  <Item Name="CSVtoFHIR_Observation_Operation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="Filename">Observation_%f_%Q%!+(_a).json</Setting>
     <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/</Setting>
   </Item>
 </Production>

@@ -17,7 +17,7 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
         
         //init bundle 
         set bundle = ##class(HS.FHIRModel.R4.Bundle).%New()
-        set bundle.type = "transaction"
+        set bundle.type = "batch"
         do bundle.IncludeEntry()                  
         set bundleentry = ##class(HS.FHIRModel.R4.BundleX.SeqOfBundleXEntry).%New()                  
         set headers = stream.ReadLine()
@@ -43,8 +43,18 @@ Method OnMessage(pRequest As Ens.StreamContainer, Output pResponse As Ens.Stream
                 set entry = ##class(HS.FHIRModel.R4.BundleX.Entry).%New()                 
                 set entry.resource = resource
                 set request = ##class(HS.FHIRModel.R4.BundleX.Request).%New()
-                set request.method = "POST"
-                set request.url = $ZConvert($Extract(CSVresource, 1), "U")_$Extract(CSVresource, 2, *)
+                if CSVresource = "patient"
+                {
+                    set request.method = "PUT"
+                    set rid = resource.fhirID 
+                    set request.url = $ZConvert($Extract(CSVresource, 1), "U")_$Extract(CSVresource, 2, *)_"/"_rid
+                } 
+                else
+                {
+                    set request.method = "POST"                    
+                    set request.url = $ZConvert($Extract(CSVresource, 1), "U")_$Extract(CSVresource, 2, *)
+                }
+                
                 set entry.request = request  
                 do bundleentry.add(entry)               
                
