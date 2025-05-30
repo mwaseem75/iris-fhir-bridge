@@ -9,7 +9,7 @@
 - #### 🧾 CSV → FHIR Transformation
 Convert structured legacy data in CSV format into FHIR resources using InterSystems' native FHIR object model.
 
-**Currently supports:**
+**Currently supported FHIR resources:**
 - `Patient`
 - `Encounter`
 - `Observation`
