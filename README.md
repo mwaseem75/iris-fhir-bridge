@@ -15,7 +15,9 @@ It seamlessly converts HL7 v2, CCDA, and CSV formats to FHIR, and FHIR back to H
 HL7, CDA, FHIR, CSV sample data files provided in the Use `src/data` folder.
 
 ✅ **Postman Collection Included**  
-Test all REST endpoints using the ready-to-import Postman collection provided in the `src/Postman_collection` folder.
+Test all REST endpoints using the ready-to-import Postman collection provided in the `src/collection` folder.
+![image](https://github.com/user-attachments/assets/8398a595-3b6d-4189-bf93-0e66f3f962da)
+
 
 
 ## ✅ Prerequisites
@@ -49,7 +51,7 @@ USER>zpm "install iris-fhir-bridge"
 
 ## 🖥️ View Production
 Navigate to [http://localhost:32783/csp/healthshare/fhirbridge/EnsPortal.ProductionConfig.zen?$NAMESPACE=FHIRBRIDGE&](http://localhost:32783/csp/healthshare/fhirbridge/EnsPortal.ProductionConfig.zen?$NAMESPACE=FHIRBRIDGE&) to view the production 
-![image](https://github.com/user-attachments/assets/4c928ba2-b0d1-4003-88b7-7f70f5b4071c)
+![image](https://github.com/user-attachments/assets/49754c56-5735-400f-8304-3b0d979b5770)
 
 
 ## 🔧 Conversion Workflows
