@@ -29,8 +29,10 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="context.streamContainer" value="callresponse" action="set" languageOverride="" />
 </response>
 </call>
-<if name='Check Resource Type' condition='context.resourceType = "patient"' xpos='200' ypos='450' xend='200' yend='700' >
-<true>
+
+<switch name='Resource Type' xpos='470' ypos='400' xend='470' yend='650' >
+
+<case condition='context.resourceType = "patient"' >
 <call name='Create Patient Resource' target='CSVtoFHIR_Patient_Operation' async='1' xpos='470' ypos='600' >
 <request type='Ens.StreamContainer' >
 <assign property="callrequest" value="context.streamContainer" action="set" languageOverride="" />
@@ -39,18 +41,50 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="callresponse" value="context.streamContainer" action="set" languageOverride="" />
 </response>
 </call>
-</true>
-<false>
-<call name='Create Observation Resource' target='CSVtoFHIR_Observation_Operation' async='1' xpos='200' ypos='600' >
+</case>
+<case condition='context.resourceType = "observation"' >
+<call name='Create Observation Resource' target='CSVtoFHIR_Observation_Operation' async='1' xpos='470' ypos='600' >
 <request type='Ens.StreamContainer' >
 <assign property="callrequest" value="context.streamContainer" action="set" languageOverride="" />
 </request>
 <response type='Ens.StreamContainer' >
-<assign property="callresponse.Stream" value="context.streamContainer.stream" action="set" languageOverride="" />
+<assign property="callresponse" value="context.streamContainer" action="set" languageOverride="" />
 </response>
 </call>
-</false>
-</if>
+</case>
+<case condition='context.resourceType = "encounter"' >
+<call name='Create Encounter Resource' target='CSVtoFHIR_Encounter_Operation' async='1' xpos='470' ypos='600' >
+<request type='Ens.StreamContainer' >
+<assign property="callrequest" value="context.streamContainer" action="set" languageOverride="" />
+</request>
+<response type='Ens.StreamContainer' >
+<assign property="callresponse" value="context.streamContainer" action="set" languageOverride="" />
+</response>
+</call>
+</case>
+<case condition='context.resourceType = "organization"' >
+<call name='Create Organization Resource' target='CSVtoFHIR_Organization_Operation' async='1' xpos='470' ypos='600' >
+<request type='Ens.StreamContainer' >
+<assign property="callrequest" value="context.streamContainer" action="set" languageOverride="" />
+</request>
+<response type='Ens.StreamContainer' >
+<assign property="callresponse" value="context.streamContainer" action="set" languageOverride="" />
+</response>
+</call>
+</case>
+<case condition='context.resourceType = "practitioner"' >
+<call name='Create Practitioner Resource' target='CSVtoFHIR_Practitioner_Operation' async='1' xpos='470' ypos='600' >
+<request type='Ens.StreamContainer' >
+<assign property="callrequest" value="context.streamContainer" action="set" languageOverride="" />
+</request>
+<response type='Ens.StreamContainer' >
+<assign property="callresponse" value="context.streamContainer" action="set" languageOverride="" />
+</response>
+</call>
+</case>
+<default>
+</default>
+</switch>
 </sequence>
 </process>
 }

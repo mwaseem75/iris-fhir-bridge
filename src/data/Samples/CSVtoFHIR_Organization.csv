@@ -1,0 +1,6 @@
+resourceType,ID,Name,Type,City,State,PostalCode,Country
+Organization,ORG001,HealthCare Inc.,hospital,NY,10001,USA,New York
+Organization,ORG002,MediClinic,clinic,CA,90001,USA,Los Angeles
+Organization,ORG003,GlobalHealth,insurer,IL,60601,USA,Chicago
+Organization,ORG004,Wellness Group,prov,TX,77001,USA,Houston
+Organization,ORG005,Peak Hospital,hospital,WA,98101,USA,Seattle

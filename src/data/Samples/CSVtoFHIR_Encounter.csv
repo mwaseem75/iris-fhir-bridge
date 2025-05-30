@@ -1,0 +1,11 @@
+resourceType,ID,Status,Class,subjectReference,startDate,endDate,organizationReference
+Encounter,ENC001,in-progress,ambulatory,Patient/100,2025-05-01T08:00:00Z,2025-05-01T12:00:00Z,Organization/ORG001
+Encounter,ENC002,finished,emergency,Patient/100,2025-05-02T14:00:00Z,2025-05-02T18:00:00Z,Organization/ORG002
+Encounter,ENC003,planned,inpatient,Patient/101,2025-05-03T09:00:00Z,2025-05-03T16:00:00Z,Organization/ORG003
+Encounter,ENC004,in-progress,outpatient,Patient/101,2025-05-04T10:00:00Z,2025-05-04T13:00:00Z,Organization/ORG004
+Encounter,ENC005,finished,ambulatory,Patient/101,2025-05-05T11:00:00Z,2025-05-05T15:00:00Z,Organization/ORG005
+Encounter,ENC006,planned,emergency,Patient/103,2025-05-06T08:00:00Z,2025-05-06T12:00:00Z,Organization/ORG001
+Encounter,ENC007,in-progress,inpatient,Patient/103,2025-05-07T14:00:00Z,2025-05-07T18:00:00Z,Organization/ORG002
+Encounter,ENC008,finished,outpatient,Patient/104,2025-05-08T09:00:00Z,2025-05-08T16:00:00Z,Organization/ORG003
+Encounter,ENC009,planned,ambulatory,Patient/103,2025-05-09T10:00:00Z,2025-05-09T13:00:00Z,Organization/ORG004
+Encounter,ENC010,in-progress,emergency,Patient/100,2025-05-10T11:00:00Z,2025-05-10T15:00:00Z,Organization/ORG005

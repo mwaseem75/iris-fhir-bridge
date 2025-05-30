@@ -51,7 +51,7 @@ XData ProductionDefinition
   </Item>
   <Item Name="CSVtoFHIR_Bundle_Operation" Category="" ClassName="dc.FhirBridge.BO.CSVtoFHIRBundle" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
   </Item>
-   <Item Name="FHIRRouter" Category="" ClassName="dc.FhirBridge.BP.FHIRRouter" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  <Item Name="FHIRRouter" Category="" ClassName="dc.FhirBridge.BP.FHIRRouter" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="FHIRtoSDA_Process" Category="" ClassName="dc.FhirBridge.BP.FHIRtoSDA" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="TargetConfigName">SDAtoHL7_Process</Setting>
@@ -66,11 +66,23 @@ XData ProductionDefinition
   </Item>
   <Item Name="CSVtoFHIR_Patient_Operation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="Filename">Patient_%f_%Q%!+(_a).json</Setting>
-    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/Patients/</Setting>
   </Item>
   <Item Name="CSVtoFHIR_Observation_Operation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="Filename">Observation_%f_%Q%!+(_a).json</Setting>
-    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/Observations/</Setting>
+  </Item>
+  <Item Name="CSVtoFHIR_Organization_Operation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="Filename">Organization_%f_%Q%!+(_a).json</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/Organizations/</Setting>
+  </Item>
+  <Item Name="CSVtoFHIR_Encounter_Operation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="Filename">Encounter_%f_%Q%!+(_a).json</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/Encounters/</Setting>
+  </Item>
+  <Item Name="CSVtoFHIR_Practitioner_Operation" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="Filename">Practitioner_%f_%Q%!+(_a).json</Setting>
+    <Setting Target="Adapter" Name="FilePath">/opt/irisapp/data/out/Practitioners/</Setting>
   </Item>
 </Production>
 }

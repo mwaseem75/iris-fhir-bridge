@@ -51,11 +51,6 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
-					},
-					{
-						"key": "",
-						"value": "app",
-						"type": "text"
 					}
 				],
 				"body": {
@@ -85,7 +80,7 @@
 			"response": []
 		},
 		{
-			"name": "Post bundle",
+			"name": "Post Production Generated Resources",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -200,6 +195,135 @@
 			"response": []
 		},
 		{
+			"name": "Get Encounter",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:32783/csp/fhirbridge/fhir/r4/Encounter/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32783",
+					"path": [
+						"csp",
+						"fhirbridge",
+						"fhir",
+						"r4",
+						"Encounter",
+						""
+					]
+				},
+				"description": "Get Encounters"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Practitioner",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:32783/csp/fhirbridge/fhir/r4/Practitioner/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32783",
+					"path": [
+						"csp",
+						"fhirbridge",
+						"fhir",
+						"r4",
+						"Practitioner",
+						""
+					]
+				},
+				"description": "Get Practitioner Resources "
+			},
+			"response": []
+		},
+		{
+			"name": "Get Organization",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:32783/csp/fhirbridge/fhir/r4/Organization/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32783",
+					"path": [
+						"csp",
+						"fhirbridge",
+						"fhir",
+						"r4",
+						"Organization",
+						""
+					]
+				},
+				"description": "Get Organization Resources"
+			},
+			"response": []
+		},
+		{
 			"name": "CDAtoFHIR",
 			"request": {
 				"auth": {
@@ -210,11 +334,6 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "",
-						"value": "app",
 						"type": "text"
 					}
 				],
