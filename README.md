@@ -79,7 +79,7 @@ The generated FHIR Bundle is ready to be posted directly to a FHIR server, enabl
 ![image](https://github.com/user-attachments/assets/8879a481-8ee0-4b99-8f9e-97b332afc6c1)
 ![image](https://github.com/user-attachments/assets/9bfae4e5-e99c-4506-a078-3a93e5bc75b4)
 
-The related resource operation generates a JSON file containing the FHIR Bundle, which can be directly posted to any FHIR-compliant server.
+The related Business Operation generates a JSON file containing the FHIR Bundle, which can be directly posted to any FHIR-compliant server.
 ![image](https://github.com/user-attachments/assets/07e5ded2-6419-4893-bf80-90f74b39c6a6)
 
 **Observation synthetic data (CSV format) and generated FHIR bundle resource**
