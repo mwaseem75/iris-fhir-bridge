@@ -75,6 +75,13 @@ Navigate to [http://localhost:32783/csp/healthshare/fhirbridge/EnsPortal.Product
 Parses structured CSV data and transforms it into valid FHIR resources using the InterSystems **FHIR Object Model (HS.FHIRModel.R4.)**. Designed for production environments, this service reads structured CSV files, maps each row to corresponding FHIR resources (e.g., Patient, Encounter, Observation, etc.), and assembles them into a fully compliant **FHIR Bundle**.
 The generated FHIR Bundle is ready to be posted directly to a FHIR server, enabling seamless integration and automated ingestion of legacy tabular data into modern healthcare systems.
 
+**Practitioner synthetic data (CSV format) and generated FHIR bundle resource**
+![image](https://github.com/user-attachments/assets/deb6993d-139c-46f1-837a-e977070bda34)
+![image](https://github.com/user-attachments/assets/67b1530a-93f9-4e4e-a109-7ed9174a516c)
+
+The related resource operation generates a JSON file containing the FHIR Bundle, which can be directly posted to any FHIR-compliant server.
+![image](https://github.com/user-attachments/assets/eb6889cd-f581-47c8-b7fb-d6cdd4f593f9)
+
 **Patient synthetic data (CSV format) and generated FHIR bundle resource**
 ![image](https://github.com/user-attachments/assets/c928c021-7134-498a-b893-b59effbf62c5)
 ![image](https://github.com/user-attachments/assets/9bfae4e5-e99c-4506-a078-3a93e5bc75b4)
@@ -87,9 +94,7 @@ The generated FHIR Bundle is ready to be posted directly to a FHIR server, enabl
 ![image](https://github.com/user-attachments/assets/bc53a1b9-8c8f-4c2f-a99e-e7706f5e52c9)
 ![image](https://github.com/user-attachments/assets/6ea1ba87-02fa-43de-b07f-29988df71172)
 
-**Practitioner synthetic data (CSV format) and generated FHIR bundle resource**
-![image](https://github.com/user-attachments/assets/deb6993d-139c-46f1-837a-e977070bda34)
-![image](https://github.com/user-attachments/assets/67b1530a-93f9-4e4e-a109-7ed9174a516c)
+
 
 **Organization synthetic data (CSV format) and generated FHIR bundle resource**
 ![image](https://github.com/user-attachments/assets/111addd7-4929-4b98-bfd9-a3af682cd561)
