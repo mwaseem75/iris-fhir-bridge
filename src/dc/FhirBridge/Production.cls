@@ -39,7 +39,7 @@ XData ProductionDefinition
   <Item Name="HS.Util.Trace.Operations" Category="" ClassName="HS.Util.Trace.Operations" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="HS.FHIRServer.Interop.Service" Category="" ClassName="HS.FHIRServer.Interop.Service" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
-    <Setting Target="Host" Name="TargetConfigName">FHIRRouter</Setting>
+    <Setting Target="Host" Name="TargetConfigName">FHIRServer_Process</Setting>
   </Item>
   <Item Name="CSV_File_Service" Category="" ClassName="EnsLib.File.PassthroughService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Host" Name="TargetConfigNames">CSVtoFHIR_Process</Setting>
@@ -51,7 +51,7 @@ XData ProductionDefinition
   </Item>
   <Item Name="CSVtoFHIR_Bundle_Operation" Category="" ClassName="dc.FhirBridge.BO.CSVtoFHIRBundle" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
   </Item>
-  <Item Name="FHIRRouter" Category="" ClassName="dc.FhirBridge.BP.FHIRRouter" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  <Item Name="FHIRServer_Process" Category="" ClassName="dc.FhirBridge.BP.FHIRRouter" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="FHIRtoSDA_Process" Category="" ClassName="dc.FhirBridge.BP.FHIRtoSDA" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="TargetConfigName">SDAtoHL7_Process</Setting>
